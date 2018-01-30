@@ -7,16 +7,20 @@ const util = require("./util.js")
 module.exports = {
 
     getBalance: (address) => {
-        return axios.get(config.RESTEndpoint + '/v2/address/balance/' + address)
-            .then((res) => {
-                return res.data
-            })
+        return module.exports.queryRPC('getbalance', [address]).then((res) => {
+            return res.Balance;
+        })
+        //return axios.get(config.RESTEndpoint + '/v2/address/balance/' + address)
+        //    .then((res) => {
+        //        return res.data
+        //    })
     },
 
     getRPCEndpoint: () => {
-        return axios.get(config.RESTEndpoint + '/v2/network/best_node').then(function (response) {
-            return response.data.node
-        })
+        //return axios.get(config.RESTEndpoint + '/v2/network/best_node').then(function (response) {
+        //    return response.data.node
+        //})
+        return config.RPCEndpoint;
     },
 
     queryRPC: (method, params, id = 1) => {
